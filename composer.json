@@ -1,0 +1,25 @@
+{
+    "name": "evaluationfactory/utility",
+    "description": "Evaluation Factory Utility",
+    "keywords": ["link4lead", "evaluationfactory", "utility", "string"],
+    "type": "library",
+    "homepage": "https://www.link4lead.com/",
+    "license": "GNU",
+    "authors": [
+        {
+            "name": "Link4LEAD",
+            "homepage": "http://www.link4lead.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Utility\\": "src/Utility/"
+        }
+    }
+}
