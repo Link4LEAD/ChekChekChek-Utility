@@ -28,7 +28,7 @@ class String
      * Generates a random string of alphanumeric characters
      * @param int $length Desired chain length
      * @param string $allowedChars Characters allowed
-     * @return string Chaîne de caractères aléatoires
+     * @return string Random string of alphanumeric characters
      */
 	public static function randString($length = 10, $allowedChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') 
     {
