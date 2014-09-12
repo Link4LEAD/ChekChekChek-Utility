@@ -9,28 +9,28 @@ namespace Utility;
 class String
 {
     /**
-	 * Remove all spaces from a string
-	 * @param string $string
-	 * @return string
-	 */
-	public static function removeWhitespace($string) {
-		/**
-		 * \0 :  NIL char
-		 * \xC2 : non-breaking space
-		 * \xA0 : non-breaking space
-		 * \x0B : vertical tab
-		 * \t : tab
-		 */
-		return preg_replace('/[\0\xC2\xA0\x0B\t\ \ \ \]+/u', '', $string);
-	}
-	
+     * Remove all spaces from a string
+     * @param string $string
+     * @return string
+     */
+    public static function removeWhitespace($string) {
+        /**
+         * \0 :  NIL char
+         * \xC2 : non-breaking space
+         * \xA0 : non-breaking space
+         * \x0B : vertical tab
+         * \t : tab
+         */
+        return preg_replace('/[\0\xC2\xA0\x0B\t\ \ \ \]+/u', '', $string);
+    }
+
     /**
      * Generates a random string of alphanumeric characters
      * @param int $length Desired chain length
      * @param string $allowedChars Characters allowed
      * @return string Random string of alphanumeric characters
      */
-	public static function randString($length = 10, $allowedChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') 
+    public static function randString($length = 10, $allowedChars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
     {
         if (!self::isPositiveInt($length)) {
             return false;
@@ -43,18 +43,39 @@ class String
         }
 
         return $randString;
-	}
-    
+    }
+
     /**
-	 * Checks that a variable is a positive integer
-	 * @param mixed $mixed Variable to test
-	 * @return boolean True if positive integer, false otherwise
-	 */
-	public static function isPositiveInt($mixed) {
-		if (!isset($mixed) || is_bool($mixed)) {
-			return false;
+     * Checks that a variable is a positive integer
+     * @param mixed $mixed Variable to test
+     * @return boolean True if positive integer, false otherwise
+     */
+    public static function isPositiveInt($mixed) {
+        if (!isset($mixed) || is_bool($mixed)) {
+            return false;
         }
 
-		return filter_var($mixed, FILTER_VALIDATE_INT, array('options' => array('min_range' => 0))) ? true : false;
+        return filter_var($mixed, FILTER_VALIDATE_INT, array('options' => array('min_range' => 0))) ? true : false;
+    }
+
+    /**
+	 * Check that a value or an array of values are numbers
+	 * @param mixed $mixed Variable or array
+	 * @return boolean True if value is a number, false otherwise
+	 */
+	public static function isNumber($mixed) {
+		if (is_array($mixed)) {
+			foreach ($mixed as $mix) {
+				if (!self::isNumber($mix)) {
+					return false;
+				}
+			}
+		} else {
+			if (!preg_match('/^\-?[0-9]+\.?[0-9]*$/', $mixed)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

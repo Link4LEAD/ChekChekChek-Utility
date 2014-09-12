@@ -4,7 +4,8 @@ use Utility\String;
 
 class StringTest extends \PHPUnit_Framework_TestCase
 {
-    public function providerRemoveWhitespace() {
+    public function providerRemoveWhitespace()
+    {
         return array(
             array("   &nbsp;", '&nbsp;'), // 0
             array('666  ', '666'),
@@ -19,7 +20,8 @@ lignemaispaslesespaces")
         );
     }
 
-    public function providerRandString() {
+    public function providerRandString()
+    {
 		return array (
 			array('', true, ''), // 0
 			array(true, true, ''),
@@ -37,7 +39,8 @@ lignemaispaslesespaces")
 		);
 	}
 
-    public function providerIsPositiveInt() {
+    public function providerIsPositiveInt()
+    {
 		return array(
 			array('test', false), // 0
 			array(true, false),
@@ -52,11 +55,33 @@ lignemaispaslesespaces")
 		);
 	}
 
+    public function providerIsNumber()
+    {
+		return array(
+			array('test', false), // 0
+			array(false, false),
+			array(null, false),
+			array('2e4', false),
+			array('a35', false),
+			array('-187417840', true), // 5
+			array('471845', true),
+			array(-47.12, true),
+			array(7484, true),
+			array(0, true),
+			array(0.1818, true), // 10
+			array(array('error', 'test', 'not a number'), false),
+			array(array('error', 'test', 8), false),
+			array(array(19,  5.2, 8.7), true),
+			array(array(19, 'e7', 8.7), false)
+		);
+	}
+
     /**
 	 * @covers String::removeWhitespace
 	 * @dataProvider providerRemoveWhitespace
 	 */
-    public function testRemoveWhitespace($value, $expected) {
+    public function testRemoveWhitespace($value, $expected)
+    {
         $this->assertSame($expected, String::removeWhitespace($value));
     }
 
@@ -64,7 +89,8 @@ lignemaispaslesespaces")
 	 * @covers String::randString
 	 * @dataProvider providerRandString
 	 */
-	public function testRandString($value, $expectingFalse, $allowedChars) {
+	public function testRandString($value, $expectingFalse, $allowedChars)
+    {
 		if ($expectingFalse) {
 			$this->assertFalse(String::randString($value));
 		} else {
@@ -84,7 +110,17 @@ lignemaispaslesespaces")
 	 * @covers String::isPositiveInt
 	 * @dataProvider providerIsPositiveInt
 	 */
-	public function testIsPositiveInt($value, $expected) {
+	public function testIsPositiveInt($value, $expected)
+    {
 		$this->assertSame($expected, String::isPositiveInt($value));
+	}
+
+    /**
+	 * @covers String::isNumber
+	 * @dataProvider providerIsNumber
+	 */
+	public function testIsNumber($strValue, $bExpected)
+    {
+		$this->assertSame($bExpected, String::isNumber($strValue));
 	}
 }
