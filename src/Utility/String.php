@@ -78,4 +78,33 @@ class String
 
 		return true;
 	}
+
+    /**
+     * Transform a random string into a ascii-only string
+     * @param string $string
+     * @return string Ascii-only string separated by -
+     */
+    public static function slugify($string)
+    {
+        if (!is_string($string)) {
+            return null;
+        }
+
+        // replace non letter or digits by -
+        $string = preg_replace('#[^\\pL\d]+#u', '-', $string);
+
+        // Transliterate
+        $string = iconv('utf-8', 'us-ascii//TRANSLIT', $string);
+
+        // Lowercase
+        $string = strtolower($string);
+
+        // Remove unwanted characters
+        $string = preg_replace('~[^-\w]+~', '', $string);
+
+        // Trim
+        $string = trim($string, '-');
+
+        return $string;
+    }
 }
