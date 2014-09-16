@@ -90,6 +90,8 @@ class String
             return null;
         }
 
+        setlocale(LC_CTYPE, 'fr_FR.UTF-8');
+
         // replace non letter or digits by -
         $string = preg_replace('#[^\\pL\d]+#u', '-', $string);
 
