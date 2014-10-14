@@ -61,26 +61,26 @@ class String
     }
 
     /**
-	 * Check that a value or an array of values are numbers
-	 * @param mixed $mixed Variable or array
-	 * @return boolean True if value is a number, false otherwise
-	 */
-	public static function isNumber($mixed)
+     * Check that a value or an array of values are numbers
+     * @param mixed $mixed Variable or array
+     * @return boolean True if value is a number, false otherwise
+     */
+    public static function isNumber($mixed)
     {
-		if (is_array($mixed)) {
-			foreach ($mixed as $mix) {
-				if (!self::isNumber($mix)) {
-					return false;
-				}
-			}
-		} else {
-			if (!preg_match('/^\-?[0-9]+\.?[0-9]*$/', $mixed)) {
-				return false;
-			}
-		}
+        if (is_array($mixed)) {
+            foreach ($mixed as $mix) {
+                if (!self::isNumber($mix)) {
+                    return false;
+                }
+            }
+        } else {
+            if (!preg_match('/^\-?[0-9]+\.?[0-9]*$/', $mixed)) {
+                return false;
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
     /**
      * Transform a random string into a ascii-only string
