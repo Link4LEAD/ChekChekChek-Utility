@@ -13,7 +13,8 @@ class String
      * @param string $string
      * @return string
      */
-    public static function removeWhitespace($string) {
+    public static function removeWhitespace($string)
+    {
         /**
          * \0 :  NIL char
          * \xC2 : non-breaking space
@@ -50,7 +51,8 @@ class String
      * @param mixed $mixed Variable to test
      * @return boolean True if positive integer, false otherwise
      */
-    public static function isPositiveInt($mixed) {
+    public static function isPositiveInt($mixed)
+    {
         if (!isset($mixed) || is_bool($mixed)) {
             return false;
         }
@@ -63,7 +65,8 @@ class String
 	 * @param mixed $mixed Variable or array
 	 * @return boolean True if value is a number, false otherwise
 	 */
-	public static function isNumber($mixed) {
+	public static function isNumber($mixed)
+    {
 		if (is_array($mixed)) {
 			foreach ($mixed as $mix) {
 				if (!self::isNumber($mix)) {
