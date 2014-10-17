@@ -2,7 +2,7 @@
 
 use Utility\Vector;
 
-class StringTest extends \PHPUnit_Framework_TestCase
+class VectorTest extends \PHPUnit_Framework_TestCase
 {
     public function providerPluck()
     {

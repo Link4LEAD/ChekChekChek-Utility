@@ -83,7 +83,7 @@ lignemaispaslesespaces")
 			array(null, null),
 			array(-47.12, null),
 			array(7484, null),
-			array(new \Datetime('now'), null),
+			array(new \stdClass(), null),
 			array('test', 'test'), // 5
 			array('Êtes-vous fait pour être le prochain développeur de notre agence ?', 'etes-vous-fait-pour-etre-le-prochain-developpeur-de-notre-agence'),
 			array('0123456789', '0123456789'),
