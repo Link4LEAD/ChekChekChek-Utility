@@ -22,5 +22,28 @@ class Vector
         }, array());
     }
 
+	/**
+	 * Transform multiple similar arrays into key-valued arrays
+	 * @see Test cases for more information
+	 * @param mixed[] $array
+	 */
+	public static function transpose($array)
+	{
+		if (!is_array($array)) {
+				return null;
+		}
 
+		$out = array();
+		foreach ($array as $key => $subarr) {
+			if (!is_array($subarr)) {
+				continue;
+			}
+
+			foreach ($subarr as $subkey => $subvalue) {
+				$out[$subkey][$key] = $subvalue;
+			}
+		}
+
+		return $out;
+	}
 }
