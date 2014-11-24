@@ -20,6 +20,55 @@ lignemaispaslesespaces")
         );
     }
 
+	public function providerNormalizeWhitespace()
+	{
+		return array(
+			array("   &nbsp;", '&nbsp;'),
+			array('666', '666'), // 5
+			array('107, quai du docteur Dervaux,92600  ', '107, quai du docteur Dervaux,92600'),
+			array('Espace  demerde', 'Espace de merde'),
+			array("On veut	garder les
+                retours à la
+				ligne mais pas les  espaces",
+				"On veut garder les
+ retours à la
+ ligne mais pas les espaces")
+		);
+	}
+
+	public function providerRemoveLine()
+	{
+		return array(
+			array("Ceci <br /> avec un saut
+ à la   ligne   et \ndes es\r\npac\n\res  en trop \t!  ", 'Ceci <br /> avec un saut à la   ligne   et des espaces  en trop 	!  '), // 0
+			array(" Multiples
+ sauts
+ à
+ la
+ ligne.", ' Multiples sauts à la ligne.'),
+			array('666', '666'),
+		);
+	}
+
+	public function providerNormalize()
+	{
+		return array(
+			array("Ceci <br /> avec un saut
+				à la   ligne   et \ndes es\r\npac\n\res  en trop \t!  ", 'Ceci avec un saut à la ligne et des espaces en trop !'), // 0
+			array('\";alert(\'XSS escaping vulnerability\');//', '\";alert(\'XSS escaping vulnerability\');//'),
+			array("   &nbsp;", '&nbsp;'),
+			array(" Multiples
+				sauts
+				à
+				la
+				ligne.", 'Multiples sauts à la ligne.'),
+			array('<h1>La pêche aux moules</h1><p>La pêche des moules etc.</p><br /><p>C\'est plus facile en <a href="#">hivers</a> etc.</p>', 'La pêche aux moulesLa pêche des moules etc. C\'est plus facile en hivers etc.'),
+			array('666', '666'), // 5
+			array('¿Puede seguir funcionando sin una  red  social corporativa?', '¿Puede seguir funcionando sin una red social corporativa?'),
+			array('<div>IS THAT A <br/></div>', 'IS THAT A'),
+		);
+	}
+
     public function providerRandString()
     {
 		return array (
@@ -101,6 +150,33 @@ lignemaispaslesespaces")
     public function testRemoveWhitespace($value, $expected)
     {
         $this->assertSame($expected, String::removeWhitespace($value));
+    }
+
+    /**
+	 * @covers String::normalizeWhitespace
+	 * @dataProvider providerNormalizeWhitespace
+	 */
+    public function testNormalizeWhitespace($value, $expected)
+    {
+        $this->assertSame($expected, String::normalizeWhitespace($value));
+    }
+
+    /**
+	 * @covers String::removeLine
+	 * @dataProvider providerRemoveLine
+	 */
+    public function testRemoveLine($value, $expected)
+    {
+        $this->assertSame($expected, String::removeLine($value));
+    }
+
+    /**
+	 * @covers String::normalize
+	 * @dataProvider providerNormalize
+	 */
+    public function testNormalize($value, $expected)
+    {
+        $this->assertSame($expected, String::normalize($value));
     }
 
     /**
