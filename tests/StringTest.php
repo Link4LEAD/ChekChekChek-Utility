@@ -56,7 +56,7 @@ lignemaispaslesespaces")
 			array("Ceci <br /> avec un saut
 				à la   ligne   et \ndes es\r\npac\n\res  en trop \t!  ", 'Ceci avec un saut à la ligne et des espaces en trop !'), // 0
 			array('\";alert(\'XSS escaping vulnerability\');//', '\";alert(\'XSS escaping vulnerability\');//'),
-			array("   &nbsp;", '&nbsp;'),
+			array("   &nbsp;", ''),
 			array(" Multiples
 				sauts
 				à
@@ -66,6 +66,7 @@ lignemaispaslesespaces")
 			array('666', '666'), // 5
 			array('¿Puede seguir funcionando sin una  red  social corporativa?', '¿Puede seguir funcionando sin una red social corporativa?'),
 			array('<div>IS THAT A <br/></div>', 'IS THAT A'),
+			array('&nbsp;&lt;ok&gt;&nbsp;&nbsp; TAG OK ? zc"  ', 'TAG OK ? zc"'),
 		);
 	}
 

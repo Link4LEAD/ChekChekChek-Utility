@@ -60,6 +60,7 @@ class String
 	public static function normalize($string)
 	{
 		$string = str_replace(array('<br/>', '<br />', '</br>', '<br>', '<br >', '< br >'), ' ', $string);
+		$string = html_entity_decode($string, ENT_HTML5, 'UTF-8');
 		$string = strip_tags($string);
 		$string = self::removeLine($string);
 		$string = self::normalizeWhitespace($string);
