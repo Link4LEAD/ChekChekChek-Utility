@@ -144,6 +144,20 @@ lignemaispaslesespaces")
 		);
 	}
 
+	public function providerIsHexadecimal()
+    {
+		return array(
+			array('000000', true),
+			array(000000, false),
+			array('111111', true),
+			array('eAf0e6', true),
+			array('eAf0e656', false),
+			array('AGCDEA', false),
+			array('EEE654', true),
+			array(222222, false)
+		);
+	}
+
     /**
 	 * @covers String::removeWhitespace
 	 * @dataProvider providerRemoveWhitespace
@@ -226,5 +240,14 @@ lignemaispaslesespaces")
 	public function testSlugify($strValue, $bExpected)
     {
 		$this->assertSame($bExpected, String::slugify($strValue));
+	}
+
+	/**
+	 * @covers String::isHexadecimal
+	 * @dataProvider providerIsHexadecimal
+	 */
+	public function testIsHeadecimal($value, $expected)
+    {
+		$this->assertSame($expected, String::isHexadecimal($value));
 	}
 }

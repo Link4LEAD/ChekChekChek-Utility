@@ -154,4 +154,22 @@ class String
 
         return $string;
     }
+
+	/**
+     * Checks that a variable is an hexadecimal value
+     * @param mixed $string Variable to test
+     * @return boolean True if hexadecimal, false otherwise
+     */
+	public static function isHexadecimal($string)
+	{
+		if (!is_string($string)) {
+            return false;
+        }
+
+		if (!preg_match('/^\b[0-9A-F]{6}\b$/i', $string)) {
+			return false;
+		}
+
+		return true;
+	}
 }
