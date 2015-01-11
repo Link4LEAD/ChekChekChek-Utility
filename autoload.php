@@ -1,7 +1,7 @@
 <?php
 
 if (version_compare(PHP_VERSION, '5.4.0', '<')) {
-	throw new Exception('The Evaluation Factory Library requires PHP version 5.4 or higher.');
+	throw new Exception('The ChekChekChek Library requires PHP version 5.4 or higher.');
 }
 
 /**
