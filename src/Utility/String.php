@@ -184,7 +184,7 @@ class String
             return false;
         }
 
-        $string = str_replace(array(' ;', ' ?', ' !', ' :', ' »', '« ', '\''), array(' ;', ' ?', ' !', ' :', ' »', '« ', '’'), $string);
+        $string = str_replace(array(' ;', ' ?', ' !', ' :', ' »', '« ', '\'', '...'), array(' ;', ' ?', ' !', ' :', ' »', '« ', '’', '…'), $string);
         $string = preg_replace('#([^\"]*)\"([^\"]*)\"([^\"]*)#u', '$1“$2”$3', $string);
 
         return $string;
