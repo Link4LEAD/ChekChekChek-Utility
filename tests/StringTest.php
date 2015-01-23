@@ -83,7 +83,7 @@ lignemaispaslesespaces")
 			array(15, false, ''),
 			array(15, false, '0123456789'),
 			array(30, false, 'abc'),
-			array(20, false, '012345çàé'),
+			array(20, false, '012345çàé'), // 10
 			array(7, false, 'ù%3~'),
 			array(50, false, 'aBcDeFgHiJkLmNoPqRsTuVwXyZ')
 		);
@@ -147,14 +147,33 @@ lignemaispaslesespaces")
 	public function providerIsHexadecimal()
     {
 		return array(
-			array('000000', true),
+			array('000000', true), // 0
 			array(000000, false),
 			array('111111', true),
 			array('eAf0e6', true),
 			array('eAf0e656', false),
-			array('AGCDEA', false),
+			array('AGCDEA', false), // 5
 			array('EEE654', true),
 			array(222222, false)
+		);
+	}
+
+	public function providerBeautifulise()
+    {
+		return array(
+			array(12, false), // 0
+			array(array('ok'), false),
+			array(null, false),
+			array(true, false),
+			array(false, false),
+            array(new \stdClass(), false), // 5
+			array('OK', 'OK'),
+			array(' No normalize   !', ' No normalize   !'),
+			array('Ceci est faux : Oops !', 'Ceci est faux : Oops !'),
+			array('C\'est bien ici la soirée moule-frites ?', 'C’est bien ici la soirée moule-frites ?'),
+			array('"Fénéant" qu\'il disent ! C\'est présomptueux !', '“Fénéant” qu’il disent ! C’est présomptueux !'), // 10
+			array('Gandhi nous enseigne ; « Je pense. »', 'Gandhi nous enseigne ; « Je pense. »'),
+			array('Il m\'a dit : "oui" ! Ou plutôt, "Moui" !', 'Il m’a dit : “oui” ! Ou plutôt, “Moui” !'),
 		);
 	}
 
@@ -249,5 +268,14 @@ lignemaispaslesespaces")
 	public function testIsHeadecimal($value, $expected)
     {
 		$this->assertSame($expected, String::isHexadecimal($value));
+	}
+
+	/**
+	 * @covers String::beautifulise
+	 * @dataProvider providerBeautifulise
+	 */
+	public function testBeautifulise($value, $expected)
+    {
+		$this->assertSame($expected, String::beautifulise($value));
 	}
 }

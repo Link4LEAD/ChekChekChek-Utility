@@ -155,21 +155,38 @@ class String
         return $string;
     }
 
-	/**
+    /**
      * Checks that a variable is an hexadecimal value
      * @param mixed $string Variable to test
      * @return boolean True if hexadecimal, false otherwise
      */
-	public static function isHexadecimal($string)
-	{
-		if (!is_string($string)) {
+    public static function isHexadecimal($string)
+    {
+        if (!is_string($string)) {
             return false;
         }
 
-		if (!preg_match('/^\b[0-9A-F]{6}\b$/i', $string)) {
-			return false;
-		}
+        if (!preg_match('/^\b[0-9A-F]{6}\b$/i', $string)) {
+            return false;
+        }
 
-		return true;
-	}
+        return true;
+    }
+
+    /**
+     * Transform an ugly string (with incorrect ponctuation) into beautiful string (with correct ponctuation)
+     * @param string $string String to be beautiful-ised
+     * @return string Beautiful-ised string
+     */
+    public static function beautifulise($string)
+    {
+        if (!is_string($string)) {
+            return false;
+        }
+
+        $string = str_replace(array(' ;', ' ?', ' !', ' :', ' »', '« ', '\''), array(' ;', ' ?', ' !', ' :', ' »', '« ', '’'), $string);
+        $string = preg_replace('#([^\"]*)\"([^\"]*)\"([^\"]*)#u', '$1“$2”$3', $string);
+
+        return $string;
+    }
 }
